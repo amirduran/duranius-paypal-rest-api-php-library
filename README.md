@@ -12,7 +12,7 @@ In the folder called *library* you will find two files
 1. DPayPal.php 
 2. cacert.pem
  
-Copy both files in your project folder, and reference file _DPayPal.php_ using `require_once` php command
+Copy both files in your project folder, and reference file `DPayPal.php` using `require_once` php command
 
 `require_once "DPayPal.php"`
 
@@ -29,7 +29,7 @@ to `CURLOPT_CAINFO => "PATH TO YOUR cacert.pem file"`
 
 ##Step 2
 
-Please enter your PayPal API credentials in the _DPayPal.php_ file
+Please enter your PayPal API credentials in the `DPayPal.php` file
 
 `protected $username = ""; //PayPal API username`
 
@@ -51,22 +51,22 @@ For example, to work with Sandbox API set `$payPalAPIUrl` to the `https://api-3t
 
 #How to use the library
 
-Anywhere in your code create DPayPal object:
+Anywhere in your code create `DPayPal` object:
 
 ```
 require_once './DPayPal.php'; //Import library
 $paypal = new DPayPal(); //Create an object
 
 ```
-Now if you want to call `SetExpressCheckout` method, just call `SetExpressCheckout` on the `$paypal` object
+Now if you want to call `SetExpressCheckout` PayPal API operation, just call `SetExpressCheckout` on the `$paypal` object like it is demonstrated here:
 
 `$response = $paypal->SetExpressCheckout($requestParams);`
 
-where `$requestParams` is array which contains values required by PayPal, and `$response` is response received by PayPal.
+where `$requestParams` is array which contains key=>value pairs required by PayPal, and `$response` is response object received by PayPal.
 
 Here is another example: 
 
-Please have a look at this PayPal payment flow in order to understand how things are working: https://www.paypalobjects.com/webstatic/en_US/developer/docs/ec/sandboxEC.gif
+Before we proceed with an example, please have a look at this PayPal payment flow in order to understand how things are working: https://www.paypalobjects.com/webstatic/en_US/developer/docs/ec/sandboxEC.gif
 
 This example explains how to obtain TOKEN from Paypal (steps 1, 2 and 3 from the image above):
 
@@ -120,37 +120,37 @@ if (is_array($response) && $response['ACK'] == 'Success') { //Request successful
 
 #Other notes
 
-To call `GetExpressCheckoutDetails` just type: 
+## To call `GetExpressCheckoutDetails` just type: 
 
 ```
 $paypal->GetExpressCheckoutDetails($requestParameters);
 ```
 
-To call `DoExpressCheckoutPayment` just type: 
+##To call `DoExpressCheckoutPayment` just type: 
 
 ```
 $paypal->DoExpressCheckoutPayment($requestParameters);
 ```
 
-To call any other PayPal API operation use method `sendRequest`. For example let's say we want to call `CreateRecurringPaymentsProfile` API operation, then we could do it like this: 
+##To call any other PayPal API operation use method `sendRequest`. For example let's say we want to call `CreateRecurringPaymentsProfile` API operation, then we could do it like this: 
 
 ```
 $paypal->sendRequest("CreateRecurringPaymentsProfile ", $requestParameters);
 ```
 
-To see errors just type:
+##To see errors just type:
 
 ```
 $paypal->showErrors();
 ```
 
-To see last response from PayPal just type:
+##To see last response from PayPal just type:
 
 ```
 $response=$paypal->getLastServerResponse();
 ```
 
-You can set new credentials by calling set methods:
+##You can set new credentials by calling set methods:
 
 ```
 $paypal->setUsername("new username");
@@ -161,7 +161,7 @@ $paypal->setApiSignature("new signature");
 
 ```
 
-You can disable or enable error reporting by calling: 
+##You can disable or enable error reporting by calling: 
 
 ```
 $paypal->enableErrorReporting();

@@ -12,7 +12,7 @@ In the folder called *library* you will find two files
 1. DPayPal.php 
 2. cacert.pem
  
-Copy both files in your project folder, and reference file _DPayPal.php_ using require_once php command
+Copy both files in your project folder, and reference file _DPayPal.php_ using `require_once` php command
 
 `require_once "DPayPal.php"`
 

@@ -3,9 +3,9 @@
 class DPayPal {
 
     //API Credentials
-    protected $username = "payment-sandbox_api1.cogora.com"; //PayPal API username
-    protected $password = "S28ND8MMVRZP5VHT"; //PayPal API password
-    protected $apiSignature = "Ad94LM04dMu7tJGxGq6vqZPzqwaHAy5PV2b8Sj0ggSn3e5Eb1fqQK7KO"; //PayPal API signature
+    protected $username = ""; //PayPal API username
+    protected $password = ""; //PayPal API password
+    protected $apiSignature = ""; //PayPal API signature
     protected $apiVersion = "74.0"; //Set PayPal API version
     //If you are using live environment use the following URL: https://api-3t.paypal.com/nvp 
     //If you are using sandbox environment then use the following URL: https://api-3t.sandbox.paypal.com/nvp

@@ -39,14 +39,119 @@ Please enter your PayPal API credentials in the _DPayPal.php_ file
 
 ##Step 3
 
-Set your PayPal working environment
+Set your PayPal working environment. Open `DPayPal.php` and set PayPal API URL:
 
-If you are using live environment use the following URL: *https://api-3t.paypal.com/nvp*
+If you are going to work with live PayPal API then use the following URL: *https://api-3t.paypal.com/nvp*
 
-If you are using sandbox environment then use the following URL: *https://api-3t.sandbox.paypal.com/nvp*
+If you are going to work with est yPal API (sandbox) then use the use the following URL: *https://api-3t.sandbox.paypal.com/nvp*
+
+For example, to work with Sandbox API set `$payPalAPIUrl` to the `https://api-3t.sandbox.paypal.com/nvp` like it is demonstrated below:
 
 `protected $payPalAPIUrl = "https://api-3t.sandbox.paypal.com/nvp";`
 
-##Step 4
+#How to use the library
 
-You are ready to go!
+Anywhere in your code create DPayPal object:
+
+```
+require_once './DPayPal.php'; //Import library
+$paypal = new DPayPal(); //Create an object
+
+```
+Now if you want to call `SetExpressCheckout` method, just call `SetExpressCheckout` on the `$paypal` object
+
+`$response = $paypal->SetExpressCheckout($requestParams);`
+
+where `$requestParams` is array which contains values required by PayPal, and `$response` is response received by PayPal.
+
+Here is another example: 
+
+Please have a look at this PayPal payment flow in order to understand how things are working: https://www.paypalobjects.com/webstatic/en_US/developer/docs/ec/sandboxEC.gif
+
+This example explains how to obtain TOKEN from Paypal (steps 1, 2 and 3 from the image above):
+
+```
+$paypal = new DPayPal(); //Create an object
+//Now we will call SetExpressCheckout API operation. All available parameters for this method are available here https://developer.paypal.com/docs/classic/api/merchant/SetExpressCheckout_API_Operation_NVP/
+
+$requestParams = array(
+    'RETURNURL' => "", //Enter your webiste URL here
+    'CANCELURL' => ""//Enter your website URL here
+);
+
+$orderParams = array(
+    'LOGOIMG' => "", //You can paste here your website logo image which will be displayed to the customer on the PayPal chechout page
+    "MAXAMT" => "100", //Set max transaction amount
+    "NOSHIPPING" => "1", //I do not want shipping
+    "ALLOWNOTE" => "0", //I do not want to allow notes
+    "BRANDNAME" => "Here enter your brand name",
+    "GIFTRECEIPTENABLE" => "0",
+    "GIFTMESSAGEENABLE" => "0"
+);
+$item = array(
+    'PAYMENTREQUEST_0_AMT' => "20",
+    'PAYMENTREQUEST_0_CURRENCYCODE' => 'GBP',
+    'PAYMENTREQUEST_0_ITEMAMT' => "20",
+    'L_PAYMENTREQUEST_0_NAME0' => 'Item name',
+    'L_PAYMENTREQUEST_0_DESC0' => 'Item description',
+    'L_PAYMENTREQUEST_0_AMT0' => "20",
+    'L_PAYMENTREQUEST_0_QTY0' => '1',
+        //"PAYMENTREQUEST_0_INVNUM" => $transaction->id - This field is useful if you want to send your internal transaction ID
+);
+
+ //Send request and wait for response
+$response = $paypal->SetExpressCheckout($requestParams + $orderParams + $item);
+
+//Response is aslo accessible by calling  $paypal->getLastServerResponse()
+
+//Now you will be redirected to the PayPal to enter your customer data
+//After that, you will be returned to the RETURN URL
+if (is_array($response) && $response['ACK'] == 'Success') { //Request successful
+    //Now we have to redirect user to the PayPal
+    $token = $response['TOKEN'];
+
+    header('Location: https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=' . urlencode($token));
+} else if (is_array($response) && $response['ACK'] == 'Failure') {
+    var_dump($response);
+    exit;
+} 
+
+```
+
+#Other notes
+
+To see errors just type
+
+```
+$paypal->showErrors();
+```
+
+To see last response from PayPal just type
+
+```
+$response=$paypal->getLastServerResponse();
+```
+
+
+You can set new credentials by calling set methods:
+
+```
+$paypal->setUsername("new username");
+
+$paypal->setPassword("new pass");
+
+$paypal->setApiSignature("new signature");
+
+```
+
+You can disable or enable error reporting 
+
+```
+$paypal->enableErrorReporting();
+
+$paypal->disableErrorReporting();
+
+```
+
+
+

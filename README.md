@@ -17,26 +17,32 @@ Copy both files in your project folder, and reference file _DPayPal.php_ using `
 `require_once "DPayPal.php"`
 
 
-Please make sure that both files DPayPal.php and cacert.pem are located in the same folder. 
+Please make sure that both files `DPayPal.php` and `cacert.pem` are located in the same folder. 
 
 
 
-If you want to keep the files in the different folders, open the file DPayPal.php and edit the following line
+If you want to keep the files `DPayPal.php` and `cacert.pem` in the different folders, then open the file `DPayPal.php` and edit the following line
 
-`CURLOPT_CAINFO => dirname(__FILE__) . '/cacert.pem', //CA cert file`
+from `CURLOPT_CAINFO => dirname(__FILE__) . '/cacert.pem', //CA cert file`
+
+to `CURLOPT_CAINFO => "PATH TO YOUR cacert.pem file"`
 
 ##Step 2
 
 Please enter your PayPal API credentials in the _DPayPal.php_ file
 
 `protected $username = ""; //PayPal API username`
+
 `protected $password = ""; //PayPal API password`
+
 `protected $apiSignature = ""; //PayPal API signature`
 
 ##Step 3
 
 Set your PayPal working environment
+
 If you are using live environment use the following URL: *https://api-3t.paypal.com/nvp*
+
 If you are using sandbox environment then use the following URL: *https://api-3t.sandbox.paypal.com/nvp*
 
 `protected $payPalAPIUrl = "https://api-3t.sandbox.paypal.com/nvp";`

@@ -62,11 +62,11 @@ Now if you want to call `SetExpressCheckout` PayPal API operation, just call `Se
 
 `$response = $paypal->SetExpressCheckout($requestParams);`
 
-where `$requestParams` is array which contains key=>value pairs required by PayPal, and `$response` is response object received by PayPal.
+where `$requestParams` is array which contains `key=>value` pairs required by PayPal, and `$response` is response object received by PayPal.
 
 Here is another example: 
 
-*IMPORTANT* - Before we proceed with an example, please have a look at this PayPal payment flow in order to understand how things are working: https://www.paypalobjects.com/webstatic/en_US/developer/docs/ec/sandboxEC.gif
+**IMPORTANT** - Before we proceed with an example, please have a look at this PayPal payment flow in order to understand how things are working: https://www.paypalobjects.com/webstatic/en_US/developer/docs/ec/sandboxEC.gif
 
 This example explains how to obtain TOKEN from Paypal (steps 1, 2 and 3 from the image above):
 

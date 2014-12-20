@@ -120,18 +120,35 @@ if (is_array($response) && $response['ACK'] == 'Success') { //Request successful
 
 #Other notes
 
-To see errors just type
+To call `GetExpressCheckoutDetails` just type: 
+
+```
+$paypal->GetExpressCheckoutDetails($requestParameters);
+```
+
+To call `DoExpressCheckoutPayment` just type: 
+
+```
+$paypal->DoExpressCheckoutPayment($requestParameters);
+```
+
+To call any other PayPal API operation use method `sendRequest`. For example let's say we want to call `CreateRecurringPaymentsProfile` API operation, then we could do it like this: 
+
+```
+$paypal->sendRequest("CreateRecurringPaymentsProfile ", $requestParameters);
+```
+
+To see errors just type:
 
 ```
 $paypal->showErrors();
 ```
 
-To see last response from PayPal just type
+To see last response from PayPal just type:
 
 ```
 $response=$paypal->getLastServerResponse();
 ```
-
 
 You can set new credentials by calling set methods:
 
@@ -144,7 +161,7 @@ $paypal->setApiSignature("new signature");
 
 ```
 
-You can disable or enable error reporting 
+You can disable or enable error reporting by calling: 
 
 ```
 $paypal->enableErrorReporting();
@@ -153,5 +170,4 @@ $paypal->disableErrorReporting();
 
 ```
 
-
-
+Hope I helped :)

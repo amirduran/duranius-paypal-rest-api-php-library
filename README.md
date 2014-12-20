@@ -66,7 +66,7 @@ where `$requestParams` is array which contains key=>value pairs required by PayP
 
 Here is another example: 
 
-Before we proceed with an example, please have a look at this PayPal payment flow in order to understand how things are working: https://www.paypalobjects.com/webstatic/en_US/developer/docs/ec/sandboxEC.gif
+*IMPORTANT* - Before we proceed with an example, please have a look at this PayPal payment flow in order to understand how things are working: https://www.paypalobjects.com/webstatic/en_US/developer/docs/ec/sandboxEC.gif
 
 This example explains how to obtain TOKEN from Paypal (steps 1, 2 and 3 from the image above):
 
@@ -120,37 +120,39 @@ if (is_array($response) && $response['ACK'] == 'Success') { //Request successful
 
 #Other notes
 
-## To call `GetExpressCheckoutDetails` just type: 
+#### To call `GetExpressCheckoutDetails` just type: 
 
 ```
 $paypal->GetExpressCheckoutDetails($requestParameters);
 ```
 
-##To call `DoExpressCheckoutPayment` just type: 
+####To call `DoExpressCheckoutPayment` just type: 
 
 ```
 $paypal->DoExpressCheckoutPayment($requestParameters);
 ```
 
-##To call any other PayPal API operation use method `sendRequest`. For example let's say we want to call `CreateRecurringPaymentsProfile` API operation, then we could do it like this: 
+####To call any other PayPal API operation use method `sendRequest`. 
+
+For example let's say we want to call `CreateRecurringPaymentsProfile` API operation, then we could do it like this: 
 
 ```
 $paypal->sendRequest("CreateRecurringPaymentsProfile ", $requestParameters);
 ```
 
-##To see errors just type:
+####To see errors just type:
 
 ```
 $paypal->showErrors();
 ```
 
-##To see last response from PayPal just type:
+####To see last response from PayPal just type:
 
 ```
 $response=$paypal->getLastServerResponse();
 ```
 
-##You can set new credentials by calling set methods:
+####You can set new credentials by calling set methods:
 
 ```
 $paypal->setUsername("new username");
@@ -161,7 +163,7 @@ $paypal->setApiSignature("new signature");
 
 ```
 
-##You can disable or enable error reporting by calling: 
+####You can disable or enable error reporting by calling: 
 
 ```
 $paypal->enableErrorReporting();

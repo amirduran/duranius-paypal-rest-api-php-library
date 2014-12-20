@@ -97,6 +97,14 @@ class DPayPal {
     public function setApiSignature($apiSignature) {
         $this->apiSignature = $apiSignature;
     }
+    
+    public function disableErrorReporting(){
+        $this->errorReportingEnabled=false;
+    }
+    
+    public function enableErrorReporting(){
+        $this->errorReportingEnabled=true;
+    }
 
     //Some private methods
     private function checkForErrors() {

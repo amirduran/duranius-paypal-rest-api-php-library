@@ -43,7 +43,7 @@ Set your PayPal working environment. Open `DPayPal.php` and set PayPal API URL:
 
 If you are going to work with live PayPal API then use the following URL: **https://api-3t.paypal.com/nvp**
 
-If you are going to work with test PayPal API (sandbox) then use the use the following URL: **https://api-3t.sandbox.paypal.com/nvp**
+If you are going to work with test PayPal API (sandbox) then use the following URL: **https://api-3t.sandbox.paypal.com/nvp**
 
 For example, if you want to work with Sandbox API set attribute `$payPalAPIUrl` located in `DPayPal.php` file to the `https://api-3t.sandbox.paypal.com/nvp` like it is demonstrated below:
 

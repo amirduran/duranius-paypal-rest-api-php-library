@@ -9,8 +9,8 @@ If you need to integrate your website with PayPal REST API, then all you need is
 
 In the folder called *library* you will find two files
 
-1. DPayPal.php 
-2. cacert.pem
+1. `DPayPal.php` 
+2. `cacert.pem`
  
 Copy both files in your project folder, and reference file `DPayPal.php` using `require_once` php command
 
@@ -41,11 +41,11 @@ Please enter your PayPal API credentials in the `DPayPal.php` file
 
 Set your PayPal working environment. Open `DPayPal.php` and set PayPal API URL:
 
-If you are going to work with live PayPal API then use the following URL: *https://api-3t.paypal.com/nvp*
+If you are going to work with live PayPal API then use the following URL: **https://api-3t.paypal.com/nvp**
 
-If you are going to work with est yPal API (sandbox) then use the use the following URL: *https://api-3t.sandbox.paypal.com/nvp*
+If you are going to work with test PayPal API (sandbox) then use the use the following URL: **https://api-3t.sandbox.paypal.com/nvp**
 
-For example, to work with Sandbox API set `$payPalAPIUrl` to the `https://api-3t.sandbox.paypal.com/nvp` like it is demonstrated below:
+For example, if you want to work with Sandbox API set attribute `$payPalAPIUrl` located in `DPayPal.php` file to the `https://api-3t.sandbox.paypal.com/nvp` like it is demonstrated below:
 
 `protected $payPalAPIUrl = "https://api-3t.sandbox.paypal.com/nvp";`
 
@@ -54,7 +54,7 @@ For example, to work with Sandbox API set `$payPalAPIUrl` to the `https://api-3t
 Anywhere in your code create `DPayPal` object:
 
 ```
-require_once './DPayPal.php'; //Import library
+require_once 'DPayPal.php'; //Import library
 $paypal = new DPayPal(); //Create an object
 
 ```
@@ -62,7 +62,7 @@ Now if you want to call `SetExpressCheckout` PayPal API operation, just call `Se
 
 `$response = $paypal->SetExpressCheckout($requestParams);`
 
-where `$requestParams` is array which contains `key=>value` pairs required by PayPal, and `$response` is response object received by PayPal.
+where `$requestParams` is array which contains `key=>value` pairs, and `$response` is response object received by PayPal.
 
 Here is another example: 
 

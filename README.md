@@ -72,7 +72,10 @@ This example explains how to obtain TOKEN from Paypal (steps 1, 2 and 3 from the
 
 ```
 $paypal = new DPayPal(); //Create an object
-//Now we will call SetExpressCheckout API operation. All available parameters for this method are available here https://developer.paypal.com/docs/classic/api/merchant/SetExpressCheckout_API_Operation_NVP/
+
+//Generating request parameters for API operation SetExpressCheckout
+//All available parameters for this method are available here
+//https://developer.paypal.com/docs/classic/api/merchant/SetExpressCheckout_API_Operation_NVP/
 
 $requestParams = array(
     'RETURNURL' => "", //Enter your webiste URL here
@@ -100,6 +103,8 @@ $item = array(
 );
 
  //Send request and wait for response
+ //Now we will call SetExpressCheckout API operation. 
+
 $response = $paypal->SetExpressCheckout($requestParams + $orderParams + $item);
 
 //Response is aslo accessible by calling  $paypal->getLastServerResponse()

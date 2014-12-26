@@ -11,13 +11,22 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width"/>
     </head>
     <body>
-        <h1>This example demonstrates my DPayPal libraray</h1>
-        <p> To start click on the button bellow</p>
-        <p>The following will happen</p>
+        <h1>This example demonstrates DPayPal libraray.</h1>
+        <p>Let's try to call <code>SetExpressCheckout</code> PayPal API method. Please have a look at payment flow provided by PayPal: </p>
+        <br>
+            <img src='https://www.paypalobjects.com/webstatic/en_US/developer/docs/ec/sandboxEC.gif' alt='PayPal ExpressCheckout flow' />
+        
+        <p>This example covers only steps 1, 2 and 3 and the rest you can finish it easily on your own. If you need any help, please contact me directly.</p>
+        
+        <p>The following steps will be performed:</p>
         <ol>
-            <li></li>
-            
+            <li>Call <code>SetExpressCheckout</code> method by using DPayPal libraray</li>
+            <li>PayPal will return us the TOKEN</li>
+            <li>Using the TOKEN, you will be redirected to the PayPal website to enter your PayPal username and password</li>
         </ol>
+        
+        PRESS START TO START THE PAYMENT<br>
+            
         <form action="payment.php" method="POST">
             <input type="Submit" value="Start" />
         </form>

@@ -1,6 +1,6 @@
 <?php
 
-require_once './DPayPal.php'; //Import library
+require_once '../library/DPayPal.php'; //Import library
 
 $paypal = new DPayPal(); //Create an object
 //Now we will call SetExpressCheckout API operation. All available parameters for this method are available here https://developer.paypal.com/docs/classic/api/merchant/SetExpressCheckout_API_Operation_NVP/
@@ -29,12 +29,14 @@ $item = array(
         //"PAYMENTREQUEST_0_INVNUM" => $transaction->id - This field is useful if you want to send your internal transaction ID
 );
 
+echo "Calling PayPal SetExpressCheckout method<br>";
 //Now you will be redirected to the PayPal to enter your customer data
 //After that, you will be returned to the RETURN URL 
 $response = $paypal->SetExpressCheckout($requestParams + $orderParams + $item);
-
+echo "Response from PayPal received:<br>".var_dump($response);
 //Response is aslo accessible by calling  $paypal->getLastServerResponse()
-
+echo "In 5 seconds you will be redirected to PayPal to enter your credentials.";
+sleep(5);
 if (is_array($response) && $response['ACK'] == 'Success') { //Request successful
     //Now we have to redirect user to the PayPal
     $token = $response['TOKEN'];

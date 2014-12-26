@@ -16,7 +16,7 @@ class DPayPal {
     protected $curl;
 
     /**
-     * Calles SetExpressCheckout PayPal API method. Result from this function shou be PayPal TOKEN
+     * The SetExpressCheckout API operation initiates an Express Checkout transaction.
      * @param array $request Array should contain key value pairs defined by PayPal
      * @return array Response from the PayPal saved in the array and returned from the function
      */
@@ -24,7 +24,7 @@ class DPayPal {
         return $this->sendRequest($request, "SetExpressCheckout");
     }
     /**
-     * Calles DoExpressCheckoutPayment PayPal API method. This method actually makes transaction.
+     * The DoExpressCheckoutPayment API operation completes an Express Checkout transaction.If you set up a billing agreement in your SetExpressCheckout API call, the billing agreement is created when you call the DoExpressCheckoutPayment API operation.The DoExpressCheckoutPayment API operation completes an Express Checkout transaction. If you set up a billing agreement in your SetExpressCheckout API call, the billing agreement is created when you call the DoExpressCheckoutPayment API operation.
      * @param array $request Array should contain key value pairs defined by PayPal
      * @return array Response from the PayPal saved in the array and returned from the function
      */
@@ -39,6 +39,65 @@ class DPayPal {
     public function GetExpressCheckoutDetails($request) {
         return $this->sendRequest($request, "GetExpressCheckoutDetails");
     }
+    
+    
+     public function DoAuthorization($request){
+        return $this->sendRequest($request, "DoAuthorization");
+    }
+    
+    /* AUTORIZATION AND CAPTURE METHODS*/
+    
+    public function DoCapture($request){
+        return $this->sendRequest($request, "DoCapture");
+    }
+    public function DoReauthorization($request){
+        return $this->sendRequest($request, "DoReauthorization");
+    }
+    
+    public function DoVoid($request){
+        return $this->sendRequest($request, "DoVoid");
+    }
+    
+    public function UpdateAuthorization($request){
+        return $this->sendRequest($request, "UpdateAuthorization");
+    }
+    
+    
+    /*Recurring Payments / Reference Transactions*/
+    public function BAUpdate($request){
+        return $this->sendRequest($request, "BAUpdate");
+    }
+    public function BillOutstandingAmount($request){
+        return $this->sendRequest($request, "BillOutstandingAmount");
+    }
+    public function CreateBillingAgreement($request){
+        return $this->sendRequest($request, "CreateBillingAgreement");
+    }
+    
+    public function CreateRecurringPaymentsProfile($request){
+        return $this->sendRequest($request, "CreateRecurringPaymentsProfile");
+    }
+    
+    public function DoReferenceTransaction($request){
+        return $this->sendRequest($request, "DoReferenceTransaction");
+    }
+    
+    public function GetRecurringPaymentsProfileDetails($request){
+        return $this->sendRequest($request, "GetRecurringPaymentsProfileDetails");
+    }
+    
+    public function ManageRecurringPaymentsProfileStatus($request){
+        return $this->sendRequest($request, "ManageRecurringPaymentsProfileStatus");
+    }
+    
+    public function UpdateRecurringPaymentsProfile($request){
+        return $this->sendRequest($request, "UpdateRecurringPaymentsProfile");
+    }
+    public function RefundTransaction($request){
+        return $this->sendRequest($request, "RefundTransaction");
+    }
+    
+    
     /**
      * This method makes calls PayPal method provided as argument.
      * @param array $requestData

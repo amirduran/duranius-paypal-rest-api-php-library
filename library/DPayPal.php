@@ -13,19 +13,38 @@ class DPayPal {
     protected $errorReportingEnabled = true;
     protected $errors = array(); //Here you can find errors for your last API call 
     protected $lastServerResponse; //Here you can find PayPal response for your last successfull API call
+    protected $curl;
 
+    /**
+     * Calles SetExpressCheckout PayPal API method. Result from this function shou be PayPal TOKEN
+     * @param array $request Array should contain key value pairs defined by PayPal
+     * @return array Response from the PayPal saved in the array and returned from the function
+     */
     public function SetExpressCheckout($request) {
         return $this->sendRequest($request, "SetExpressCheckout");
     }
-
+    /**
+     * Calles DoExpressCheckoutPayment PayPal API method. This method actually makes transaction.
+     * @param array $request Array should contain key value pairs defined by PayPal
+     * @return array Response from the PayPal saved in the array and returned from the function
+     */
     public function DoExpressCheckoutPayment($request) {
         return $this->sendRequest($request, "DoExpressCheckoutPayment");
     }
-
+    /**
+     * Calles GetExpressCheckoutDetails PayPal API method. This method gets buyer and transaction data. This method WILL NOT- make transaction itself.
+     * @param array $request Array should contain key value pairs defined by PayPal
+     * @return array Response from the PayPal saved in the array and returned from the function
+     */
     public function GetExpressCheckoutDetails($request) {
         return $this->sendRequest($request, "GetExpressCheckoutDetails");
     }
-
+    /**
+     * This method makes calls PayPal method provided as argument.
+     * @param array $requestData
+     * @param string $method
+     * @return array 
+     */
     public function sendRequest($requestData, $method) {
 
         if (!isset($method)) {
@@ -53,6 +72,7 @@ class DPayPal {
         $finalRequest = http_build_query($requestParameters);
 
         $ch = curl_init();
+        $this->curl=$ch;
         
         $curlOptions=$this->getcURLOptions();
         $curlOptions[CURLOPT_POSTFIELDS]=$finalRequest;
@@ -77,43 +97,71 @@ class DPayPal {
             return $this->lastServerResponse;
         }
     }
-
+    /**
+     * Returns latest result from the PayPal servers
+     * @return array
+     */
     public function getLastServerResponse() {
         return $this->lastServerResponse;
     }
-
+    /** 
+     * Call this function if you want to retreave errors occured during last API call
+     * @return void Prints all errors during last API call.
+     */
     public function showErrors() {
         var_dump($this->errors);
     }
-
+    /**
+     * 
+     * @param string $username Set your PayPal API username
+     */
     public function setUsername($username) {
         $this->username = $username;
     }
-
+    /**
+     * 
+     * @param string $password Set your PayPal API password
+     */
     public function setPassword($password) {
         $this->password = $password;
     }
-
+    /**
+     * 
+     * @param string $apiSignature Set your PayPal API signature
+     */
     public function setApiSignature($apiSignature) {
         $this->apiSignature = $apiSignature;
     }
-    
+    /**
+     * Call this function if you want to disable error reporting
+     */
     public function disableErrorReporting(){
         $this->errorReportingEnabled=false;
     }
-    
+    /**
+     * Call this function if you want to enable error reporting
+     */
     public function enableErrorReporting(){
         $this->errorReportingEnabled=true;
     }
 
-    //Some private methods
+    /**
+     * 
+     * @return boolean Checks if there are errors and returns the true/false
+     */
     private function checkForErrors() {
+        
+        if(!is_array($this->errors) && $this->errors!="") return TRUE;
+        
         if (count($this->errors) > 0) {
             return true;
         }
         return false;
     }
-
+    /**
+     * Returns an array of options to initialize cURL
+     * @return array
+     */
     private function getcURLOptions() {
         return array(
             CURLOPT_URL => $this->payPalAPIUrl,
@@ -127,6 +175,15 @@ class DPayPal {
             CURLOPT_SSL_VERIFYPEER => true,
             CURLOPT_POST => 1,
         );
+    }
+    
+    /**
+     * If you want to set cURL with additional parameters, use this function. NOTE: Call this function prior sendRequest method
+     * @param int $option
+     * @param mixed $value
+     */
+    public function setCURLOption($option, $value){
+        curl_setopt($this->curl, $option, $value);
     }
 
 }

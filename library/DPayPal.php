@@ -16,7 +16,7 @@ class DPayPal {
     protected $curl;
 
     /**
-     * The SetExpressCheckout API operation initiates an Express Checkout transaction.
+     * The SetExpressCheckout API operation initiates an Express Checkout transaction. Look here to see method parameters: https://developer.paypal.com/docs/classic/api/merchant/SetExpressCheckout_API_Operation_NVP/
      * @param array $request Array should contain key value pairs defined by PayPal
      * @return array Response from the PayPal saved in the array and returned from the function
      */
@@ -24,7 +24,7 @@ class DPayPal {
         return $this->sendRequest($request, "SetExpressCheckout");
     }
     /**
-     * The DoExpressCheckoutPayment API operation completes an Express Checkout transaction.If you set up a billing agreement in your SetExpressCheckout API call, the billing agreement is created when you call the DoExpressCheckoutPayment API operation.The DoExpressCheckoutPayment API operation completes an Express Checkout transaction. If you set up a billing agreement in your SetExpressCheckout API call, the billing agreement is created when you call the DoExpressCheckoutPayment API operation.
+     * The DoExpressCheckoutPayment API operation completes an Express Checkout transaction. If you set up a billing agreement in your SetExpressCheckout API call, the billing agreement is created when you call the DoExpressCheckoutPayment API operation.The DoExpressCheckoutPayment API operation completes an Express Checkout transaction. If you set up a billing agreement in your SetExpressCheckout API call, the billing agreement is created when you call the DoExpressCheckoutPayment API operation. Look here to see method parameters: https://developer.paypal.com/docs/classic/api/merchant/DoExpressCheckoutPayment_API_Operation_NVP/
      * @param array $request Array should contain key value pairs defined by PayPal
      * @return array Response from the PayPal saved in the array and returned from the function
      */
@@ -32,7 +32,7 @@ class DPayPal {
         return $this->sendRequest($request, "DoExpressCheckoutPayment");
     }
     /**
-     * Calles GetExpressCheckoutDetails PayPal API method. This method gets buyer and transaction data. This method WILL NOT- make transaction itself.
+     * Calles GetExpressCheckoutDetails PayPal API method. This method gets buyer and transaction data. This method WILL NOT- make transaction itself. Look here for method parameters: https://developer.paypal.com/docs/classic/api/merchant/GetExpressCheckoutDetails_API_Operation_NVP/
      * @param array $request Array should contain key value pairs defined by PayPal
      * @return array Response from the PayPal saved in the array and returned from the function
      */
@@ -46,53 +46,113 @@ class DPayPal {
     }
     
     /* AUTORIZATION AND CAPTURE METHODS*/
-    
+    /**
+     * Captures an authorized payment. You can read more about authorization and payment: https://developer.paypal.com/docs/classic/admin/auth-capture/
+     * @param array $request
+     * @return array
+     */
     public function DoCapture($request){
         return $this->sendRequest($request, "DoCapture");
     }
+    /**
+     * The DoReauthorization API operation reauthorizes an existing authorization transaction. The resulting reauthorization is a new transaction with a new AUTHORIZATIONID. To see method arguments visit this link: https://developer.paypal.com/docs/classic/api/merchant/DoReauthorization_API_Operation_NVP/
+     * @param array $request
+     * @return array
+     */
     public function DoReauthorization($request){
         return $this->sendRequest($request, "DoReauthorization");
     }
-    
+    /**
+     * Void an order or an authorization. To see method arguments visit this link: https://developer.paypal.com/docs/classic/api/merchant/DoVoid_API_Operation_NVP/
+     * @param array $request
+     * @return array
+     */
     public function DoVoid($request){
         return $this->sendRequest($request, "DoVoid");
     }
     
+    /**
+     * To see method arguments visit this link: 
+     * @param array $request
+     * @return array
+     */
     public function UpdateAuthorization($request){
         return $this->sendRequest($request, "UpdateAuthorization");
     }
     
     
     /*Recurring Payments / Reference Transactions*/
+    
+    /**
+     * The BAUpdate API operation updates or deletes a billing agreement. To see method arguments visit this link: https://developer.paypal.com/docs/classic/api/merchant/BAUpdate_API_Operation_NVP/
+     * @param array $request
+     * @return array
+     */
     public function BAUpdate($request){
         return $this->sendRequest($request, "BAUpdate");
     }
+    /**
+     * The BillOutstandingAmount API operation bills the buyer for the outstanding balance associated with a recurring payments profile. To see method arguments visit this link: https://developer.paypal.com/docs/classic/api/merchant/BillOutstandingAmount_API_Operation_NVP/
+     * @param array $request
+     * @return array
+     */
     public function BillOutstandingAmount($request){
         return $this->sendRequest($request, "BillOutstandingAmount");
     }
+    /**
+     * The CreateBillingAgreement API operation creates a billing agreement with a PayPal account holder. CreateBillingAgreement is only valid for reference transactions. To see method arguments visit this link: https://developer.paypal.com/docs/classic/api/merchant/CreateBillingAgreement_API_Operation_NVP/
+     * @param array $request
+     * @return array
+     */
     public function CreateBillingAgreement($request){
         return $this->sendRequest($request, "CreateBillingAgreement");
     }
-    
+    /**
+     * The DoReferenceTransaction API operation processes a payment from a buyer's account, which is identified by a previous transaction. To see method arguments visit this link: https://developer.paypal.com/docs/classic/api/merchant/DoReferenceTransaction_API_Operation_NVP/
+     * @param array $request
+     * @return array
+     */
     public function CreateRecurringPaymentsProfile($request){
         return $this->sendRequest($request, "CreateRecurringPaymentsProfile");
     }
-    
+    /**
+     * The DoReferenceTransaction API operation processes a payment from a buyer's account, which is identified by a previous transaction. To see method arguments visit this link: https://developer.paypal.com/docs/classic/api/merchant/DoReferenceTransaction_API_Operation_NVP/
+     * @param array $request
+     * @return array
+     */
     public function DoReferenceTransaction($request){
         return $this->sendRequest($request, "DoReferenceTransaction");
     }
     
+    /**
+     * Obtain information about a recurring payments profile. To see method arguments visit this link: https://developer.paypal.com/docs/classic/api/merchant/GetRecurringPaymentsProfileDetails_API_Operation_NVP/
+     * @param array $request
+     * @return array
+     */
     public function GetRecurringPaymentsProfileDetails($request){
         return $this->sendRequest($request, "GetRecurringPaymentsProfileDetails");
     }
-    
+    /**
+     * The ManageRecurringPaymentsProfileStatus API operation cancels, suspends, or reactivates a recurring payments profile. To see method arguments visit this link: https://developer.paypal.com/docs/classic/api/merchant/ManageRecurringPaymentsProfileStatus_API_Operation_NVP/
+     * @param array $request
+     * @return array
+     */
     public function ManageRecurringPaymentsProfileStatus($request){
         return $this->sendRequest($request, "ManageRecurringPaymentsProfileStatus");
     }
-    
+    /**
+     * The UpdateRecurringPaymentsProfile API operation updates a recurring payments profile. To see method arguments visit this link: https://developer.paypal.com/docs/classic/api/merchant/UpdateRecurringPaymentsProfile_API_Operation_NVP/
+     * @param array $request
+     * @return array
+     */
     public function UpdateRecurringPaymentsProfile($request){
         return $this->sendRequest($request, "UpdateRecurringPaymentsProfile");
     }
+    /**
+     * The RefundTransaction API operation issues a refund to the PayPal account holder associated with a transaction. This API operation can be used to issue a full or partial refund for any transaction within a default period of 60 days from when the payment is received. To see method arguments visit this link: https://developer.paypal.com/docs/classic/api/merchant/RefundTransaction_API_Operation_NVP/
+     * @param array $request
+     * @return array
+     */
     public function RefundTransaction($request){
         return $this->sendRequest($request, "RefundTransaction");
     }

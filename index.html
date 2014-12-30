@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Duranius-paypal-rest-api-php-library by amirduran</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Duranius-paypal-rest-api-php-library</h1>
+        <h2>If you need to integrate your website with PayPal REST API, then all you need is to download this library and you are ready to go. There are only two files you need to download and import to your project.</h2>
+        <a href="https://github.com/amirduran/paypal-rest-api-php-library" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="paypal-rest-api-php-library" class="anchor" href="#paypal-rest-api-php-library" aria-hidden="true"><span class="octicon octicon-link"></span></a>paypal-rest-api-php-library</h1>
+
+<p>If you need to integrate your website with PayPal REST API, then all you need is to download this library and you are ready to go. There are only two files you need to download and import to your project.</p>
+
+<h1>
+<a id="how-to-install" class="anchor" href="#how-to-install" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to install</h1>
+
+<h2>
+<a id="step-1" class="anchor" href="#step-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Step 1</h2>
+
+<p>In the folder called <em>library</em> you will find two files</p>
+
+<ol>
+<li>
+<code>DPayPal.php</code> </li>
+<li><code>cacert.pem</code></li>
+</ol>
+
+<p>Copy both files in your project folder, and reference file <code>DPayPal.php</code> using <code>require_once</code> php command</p>
+
+<p><code>require_once "DPayPal.php"</code></p>
+
+<p>Please make sure that both files <code>DPayPal.php</code> and <code>cacert.pem</code> are located in the same folder. </p>
+
+<p>If you want to keep the files <code>DPayPal.php</code> and <code>cacert.pem</code> in the different folders, then open the file <code>DPayPal.php</code> and edit the following line</p>
+
+<p>from <code>CURLOPT_CAINFO =&gt; dirname(__FILE__) . '/cacert.pem', //CA cert file</code></p>
+
+<p>to <code>CURLOPT_CAINFO =&gt; "PATH TO YOUR cacert.pem file"</code></p>
+
+<h2>
+<a id="step-2" class="anchor" href="#step-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Step 2</h2>
+
+<p>Please enter your PayPal API credentials in the <code>DPayPal.php</code> file</p>
+
+<p><code>protected $username = ""; //PayPal API username</code></p>
+
+<p><code>protected $password = ""; //PayPal API password</code></p>
+
+<p><code>protected $apiSignature = ""; //PayPal API signature</code></p>
+
+<h2>
+<a id="step-3" class="anchor" href="#step-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Step 3</h2>
+
+<p>Set your PayPal working environment. Open <code>DPayPal.php</code> and set PayPal API URL:</p>
+
+<p>If you are going to work with live PayPal API then use the following URL: <strong><a href="https://api-3t.paypal.com/nvp">https://api-3t.paypal.com/nvp</a></strong></p>
+
+<p>If you are going to work with test PayPal API (sandbox) then use the following URL: <strong><a href="https://api-3t.sandbox.paypal.com/nvp">https://api-3t.sandbox.paypal.com/nvp</a></strong></p>
+
+<p>For example, if you want to work with Sandbox API set attribute <code>$payPalAPIUrl</code> located in <code>DPayPal.php</code> file to the <code>https://api-3t.sandbox.paypal.com/nvp</code> like it is demonstrated below:</p>
+
+<p><code>protected $payPalAPIUrl = "https://api-3t.sandbox.paypal.com/nvp";</code></p>
+
+<h1>
+<a id="how-to-use-the-library" class="anchor" href="#how-to-use-the-library" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to use the library</h1>
+
+<p>Anywhere in your code create <code>DPayPal</code> object:</p>
+
+<pre><code>require_once 'DPayPal.php'; //Import library
+$paypal = new DPayPal(); //Create an object
+
+</code></pre>
+
+<p>Now if you want to call <code>SetExpressCheckout</code> PayPal API operation, just call <code>SetExpressCheckout</code> on the <code>$paypal</code> object like it is demonstrated here:</p>
+
+<p><code>$response = $paypal-&gt;SetExpressCheckout($requestParams);</code></p>
+
+<p>where <code>$requestParams</code> is array which contains <code>key=&gt;value</code> pairs, and <code>$response</code> is response object received by PayPal.</p>
+
+<p>Here is another example: </p>
+
+<p><strong>IMPORTANT</strong> - Before we proceed with an example, please have a look at this PayPal payment flow in order to understand how things are working: <a href="https://www.paypalobjects.com/webstatic/en_US/developer/docs/ec/sandboxEC.gif">https://www.paypalobjects.com/webstatic/en_US/developer/docs/ec/sandboxEC.gif</a></p>
+
+<p>This example explains how to obtain TOKEN from Paypal (steps 1, 2 and 3 from the image above):</p>
+
+<pre><code>$paypal = new DPayPal(); //Create an object
+
+//Generating request parameters for API operation SetExpressCheckout
+//All available parameters for this method are available here
+//https://developer.paypal.com/docs/classic/api/merchant/SetExpressCheckout_API_Operation_NVP/
+
+$requestParams = array(
+    'RETURNURL' =&gt; "", //Enter your webiste URL here
+    'CANCELURL' =&gt; ""//Enter your website URL here
+);
+
+$orderParams = array(
+    'LOGOIMG' =&gt; "", //You can paste here your website logo image which will be displayed to the customer on the PayPal chechout page
+    "MAXAMT" =&gt; "100", //Set max transaction amount
+    "NOSHIPPING" =&gt; "1", //I do not want shipping
+    "ALLOWNOTE" =&gt; "0", //I do not want to allow notes
+    "BRANDNAME" =&gt; "Here enter your brand name",
+    "GIFTRECEIPTENABLE" =&gt; "0",
+    "GIFTMESSAGEENABLE" =&gt; "0"
+);
+$item = array(
+    'PAYMENTREQUEST_0_AMT' =&gt; "20",
+    'PAYMENTREQUEST_0_CURRENCYCODE' =&gt; 'GBP',
+    'PAYMENTREQUEST_0_ITEMAMT' =&gt; "20",
+    'L_PAYMENTREQUEST_0_NAME0' =&gt; 'Item name',
+    'L_PAYMENTREQUEST_0_DESC0' =&gt; 'Item description',
+    'L_PAYMENTREQUEST_0_AMT0' =&gt; "20",
+    'L_PAYMENTREQUEST_0_QTY0' =&gt; '1',
+        //"PAYMENTREQUEST_0_INVNUM" =&gt; $transaction-&gt;id - This field is useful if you want to send your internal transaction ID
+);
+
+ //Send request and wait for response
+ //Now we will call SetExpressCheckout API operation. 
+
+$response = $paypal-&gt;SetExpressCheckout($requestParams + $orderParams + $item);
+
+//Response is aslo accessible by calling  $paypal-&gt;getLastServerResponse()
+
+//Now you will be redirected to the PayPal to enter your customer data
+//After that, you will be returned to the RETURN URL
+if (is_array($response) &amp;&amp; $response['ACK'] == 'Success') { //Request successful
+    //Now we have to redirect user to the PayPal
+    $token = $response['TOKEN'];
+
+    header('Location: https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&amp;token=' . urlencode($token));
+} else if (is_array($response) &amp;&amp; $response['ACK'] == 'Failure') {
+    var_dump($response);
+    exit;
+} 
+
+</code></pre>
+
+<h1>
+<a id="other-notes" class="anchor" href="#other-notes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Other notes</h1>
+
+<h4>
+<a id="to-call-getexpresscheckoutdetails-just-type" class="anchor" href="#to-call-getexpresscheckoutdetails-just-type" aria-hidden="true"><span class="octicon octicon-link"></span></a>To call <code>GetExpressCheckoutDetails</code> just type:</h4>
+
+<pre><code>$paypal-&gt;GetExpressCheckoutDetails($requestParameters);
+</code></pre>
+
+<h4>
+<a id="to-call-doexpresscheckoutpayment-just-type" class="anchor" href="#to-call-doexpresscheckoutpayment-just-type" aria-hidden="true"><span class="octicon octicon-link"></span></a>To call <code>DoExpressCheckoutPayment</code> just type:</h4>
+
+<pre><code>$paypal-&gt;DoExpressCheckoutPayment($requestParameters);
+</code></pre>
+
+<h4>
+<a id="to-call-any-other-paypal-api-operation-use-method-sendrequest" class="anchor" href="#to-call-any-other-paypal-api-operation-use-method-sendrequest" aria-hidden="true"><span class="octicon octicon-link"></span></a>To call any other PayPal API operation use method <code>sendRequest</code>.</h4>
+
+<p>For example let's say we want to call <code>CreateRecurringPaymentsProfile</code> API operation, then we could do it like this: </p>
+
+<pre><code>$paypal-&gt;sendRequest("CreateRecurringPaymentsProfile ", $requestParameters);
+</code></pre>
+
+<h4>
+<a id="to-see-errors-just-type" class="anchor" href="#to-see-errors-just-type" aria-hidden="true"><span class="octicon octicon-link"></span></a>To see errors just type:</h4>
+
+<pre><code>$paypal-&gt;showErrors();
+</code></pre>
+
+<h4>
+<a id="to-see-last-response-from-paypal-just-type" class="anchor" href="#to-see-last-response-from-paypal-just-type" aria-hidden="true"><span class="octicon octicon-link"></span></a>To see last response from PayPal just type:</h4>
+
+<pre><code>$response=$paypal-&gt;getLastServerResponse();
+</code></pre>
+
+<h4>
+<a id="you-can-set-new-credentials-by-calling-set-methods" class="anchor" href="#you-can-set-new-credentials-by-calling-set-methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>You can set new credentials by calling set methods:</h4>
+
+<pre><code>$paypal-&gt;setUsername("new username");
+
+$paypal-&gt;setPassword("new pass");
+
+$paypal-&gt;setApiSignature("new signature");
+
+</code></pre>
+
+<h4>
+<a id="you-can-disable-or-enable-error-reporting-by-calling" class="anchor" href="#you-can-disable-or-enable-error-reporting-by-calling" aria-hidden="true"><span class="octicon octicon-link"></span></a>You can disable or enable error reporting by calling:</h4>
+
+<pre><code>$paypal-&gt;enableErrorReporting();
+
+$paypal-&gt;disableErrorReporting();
+
+</code></pre>
+
+<p>Hope I helped :)</p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/amirduran/paypal-rest-api-php-library/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/amirduran/paypal-rest-api-php-library/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/amirduran/paypal-rest-api-php-library"></a> is maintained by <a href="https://github.com/amirduran">amirduran</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>

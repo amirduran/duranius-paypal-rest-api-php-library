@@ -174,11 +174,38 @@ if (is_array($response) &amp;&amp; $response['ACK'] == 'Success') { //Request su
 </code></pre>
 
 <h4>
+<a id="list-of-available-methods" class="anchor" href="#list-of-available-methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>List of available methods</h4>
+
+<pre><code>SetExpressCheckout
+GetExpressCheckoutDetails
+DoExpressCheckoutPayment
+DoAuthorization
+DoCapture
+DoReauthorization
+DoVoid
+UpdateAuthorization
+BAUpdate
+BillOutstandingAmount
+CreateBillingAgreement
+CreateRecurringPaymentsProfile
+DoReferenceTransaction
+GetRecurringPaymentsProfileDetails
+ManageRecurringPaymentsProfileStatus
+UpdateRecurringPaymentsProfile
+RefundTransaction
+</code></pre>
+
+<h4>
 <a id="to-call-any-other-paypal-api-operation-use-method-sendrequest" class="anchor" href="#to-call-any-other-paypal-api-operation-use-method-sendrequest" aria-hidden="true"><span class="octicon octicon-link"></span></a>To call any other PayPal API operation use method <code>sendRequest</code>.</h4>
 
 <p>For example let's say we want to call <code>CreateRecurringPaymentsProfile</code> API operation, then we could do it like this: </p>
 
-<pre><code>$paypal-&gt;sendRequest("CreateRecurringPaymentsProfile ", $requestParameters);
+<pre><code>$paypal-&gt;sendRequest($requestParameters,"CreateRecurringPaymentsProfile");
+</code></pre>
+
+<p>or more generally</p>
+
+<pre><code>$paypal-&gt;sendRequest($requestParameters,"MethodName");
 </code></pre>
 
 <h4>

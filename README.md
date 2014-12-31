@@ -137,7 +137,7 @@ $paypal->GetExpressCheckoutDetails($requestParameters);
 $paypal->DoExpressCheckoutPayment($requestParameters);
 ```
 
-##List of available methods
+####List of available methods
 
 ```
 SetExpressCheckout

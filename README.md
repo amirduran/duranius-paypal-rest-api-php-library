@@ -137,12 +137,40 @@ $paypal->GetExpressCheckoutDetails($requestParameters);
 $paypal->DoExpressCheckoutPayment($requestParameters);
 ```
 
+##List of available methods
+
+```
+SetExpressCheckout
+GetExpressCheckoutDetails
+DoExpressCheckoutPayment
+DoAuthorization
+DoCapture
+DoReauthorization
+DoVoid
+UpdateAuthorization
+BAUpdate
+BillOutstandingAmount
+CreateBillingAgreement
+CreateRecurringPaymentsProfile
+DoReferenceTransaction
+GetRecurringPaymentsProfileDetails
+ManageRecurringPaymentsProfileStatus
+UpdateRecurringPaymentsProfile
+RefundTransaction
+```
+
 ####To call any other PayPal API operation use method `sendRequest`. 
 
 For example let's say we want to call `CreateRecurringPaymentsProfile` API operation, then we could do it like this: 
 
 ```
-$paypal->sendRequest("CreateRecurringPaymentsProfile ", $requestParameters);
+$paypal->sendRequest($requestParameters,"CreateRecurringPaymentsProfile");
+```
+
+or more generally
+
+```
+$paypal->sendRequest($requestParameters,"MethodName");
 ```
 
 ####To see errors just type:

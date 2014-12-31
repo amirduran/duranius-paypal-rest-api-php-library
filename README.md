@@ -64,7 +64,7 @@ Now if you want to call `SetExpressCheckout` PayPal API operation, just call `Se
 
 where `$requestParams` is array which contains `key=>value` pairs, and `$response` is response object received by PayPal.
 
-Here is another example: 
+###Advanced example: 
 
 **IMPORTANT** - Before we proceed with an example, please have a look at this PayPal payment flow in order to understand how things are working: https://www.paypalobjects.com/webstatic/en_US/developer/docs/ec/sandboxEC.gif
 
